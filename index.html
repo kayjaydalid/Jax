@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAX Car Rental</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+tailwind.config={theme:{extend:{colors:{jax:{900:'#0a1628',800:'#111d35',700:'#1a2a4a',600:'#243a63',500:'#2e4a7d',400:'#4a7ab5',300:'#7ba8d9',200:'#a8cce8',100:'#d4e6f4',accent:'#f59e0b',accentHover:'#d97706',light:'#f8fafc',surface:'#ffffff'}},fontFamily:{heading:['Outfit','sans-serif'],body:['DM Sans','sans-serif']}}}}
+</script>
+  <style>
+html,body{height:100%;margin:0;scroll-behavior:smooth}
+*{box-sizing:border-box}
+.glass{background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+.card-hover{transition:all .3s ease}
+.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,0.15)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.fade-up{animation:fadeUp .7s ease forwards}
+.fade-up-d1{animation:fadeUp .7s ease .1s forwards;opacity:0}
+.fade-up-d2{animation:fadeUp .7s ease .2s forwards;opacity:0}
+.fade-up-d3{animation:fadeUp .7s ease .3s forwards;opacity:0}
+.slide-in{animation:slideIn .4s ease forwards}
+.rate-row:nth-child(even){background:rgba(245,158,11,0.04)}
+.rate-row:hover{background:rgba(245,158,11,0.1)}
+.chat-msg{animation:fadeUp .3s ease}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
+</style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full font-body" style="background:#0a1628;color:#f8fafc">
+  <div id="app" class="h-full overflow-auto w-full"><!-- NAV -->
+   <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300" style="background:transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20">
+     <div class="flex items-center gap-2">
+      <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center font-heading font-900 text-lg sm:text-xl" style="background:#f59e0b;color:#0a1628">
+       JAX
+      </div>
+      <div>
+       <div class="font-heading font-800 text-base sm:text-lg leading-tight" style="color:#f8fafc">
+        CAR RENTAL
+       </div>
+       <div class="text-xs font-medium" style="color:#7ba8d9">
+        Drive Your Way
+       </div>
+      </div>
+     </div>
+     <div class="hidden md:flex items-center gap-6 text-sm font-medium" style="color:#a8cce8"><a href="#rates" class="hover:text-amber-400 transition">Rates</a> <a href="#booking" class="hover:text-amber-400 transition">Book Now</a> <a href="#terms" class="hover:text-amber-400 transition">Terms</a> <a href="#contact" class="hover:text-amber-400 transition">Contact</a>
+     </div><button id="mobileMenuBtn" class="md:hidden p-2" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')"><i data-lucide="menu" style="width:24px;height:24px;color:#f59e0b"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4" style="background:rgba(10,22,40,0.95)"><a href="#rates" class="block py-2 text-sm" style="color:#a8cce8" onclick="this.parentElement.classList.add('hidden')">Rates</a> <a href="#booking" class="block py-2 text-sm" style="color:#a8cce8" onclick="this.parentElement.classList.add('hidden')">Book Now</a> <a href="#terms" class="block py-2 text-sm" style="color:#a8cce8" onclick="this.parentElement.classList.add('hidden')">Terms</a> <a href="#contact" class="block py-2 text-sm" style="color:#a8cce8" onclick="this.parentElement.classList.add('hidden')">Contact</a>
+    </div>
+   </nav><!-- HERO -->
+   <section class="relative w-full" style="min-height:600px;background:linear-gradient(135deg,#0a1628 0%,#1a2a4a 40%,#243a63 100%)">
+    <div class="absolute inset-0 overflow-hidden">
+     <div class="absolute top-20 right-10 w-72 h-72 rounded-full opacity-10" style="background:#f59e0b;filter:blur(80px)"></div>
+     <div class="absolute bottom-10 left-10 w-96 h-96 rounded-full opacity-5" style="background:#4a7ab5;filter:blur(100px)"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 pb-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+     <div class="flex-1 text-center lg:text-left">
+      <div class="fade-up inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4" style="background:rgba(245,158,11,0.15);color:#f59e0b">
+       🚗 Trusted Car Rental in Luzon
+      </div>
+      <h1 id="heroTitle" class="fade-up-d1 font-heading font-900 text-4xl sm:text-5xl lg:text-6xl leading-tight mb-4" style="color:#f8fafc">Your Ride,<br><span style="color:#f59e0b">Your Way</span></h1>
+      <p id="heroSubtitle" class="fade-up-d2 text-base sm:text-lg max-w-lg mx-auto lg:mx-0 mb-8" style="color:#7ba8d9">Affordable self-drive &amp; chauffeured car rental across Luzon. Nissan Livina — spacious, fuel-efficient, reliable.</p>
+      <div class="fade-up-d3 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"><a href="#booking" class="px-6 py-3 rounded-xl font-heading font-700 text-center transition hover:scale-105" style="background:#f59e0b;color:#0a1628">Book Now</a> <a href="#rates" class="px-6 py-3 rounded-xl font-heading font-600 text-center glass hover:bg-white/10 transition" style="color:#f8fafc">View Rates</a>
+      </div>
+     </div>
+     <div class="flex-1 flex justify-center fade-up-d2"><!-- Nissan Livina SVG illustration -->
+      <img src="nissan.jpg" alt="" class="w-full max-w-md drop-shadow-2xl">
+        <lineargradient id="carBody" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="0%" stop-color="#e2e8f0" />
+         <stop offset="100%" stop-color="#94a3b8" />
+        </lineargradient>
+        <lineargradient id="windowG" x1="0" y1="0" x2="0" y2="1">
+         <stop offset="0%" stop-color="#60a5fa" />
+         <stop offset="100%" stop-color="#2563eb" />
+        </lineargradient>
+       </defs> <rect x="0" y="195" width="480" height="25" rx="12" fill="rgba(245,158,11,0.08)" /> <!-- shadow --> <ellipse cx="240" cy="195" rx="200" ry="12" fill="rgba(0,0,0,0.2)" /> <!-- body lower --> <path d="M60,155 Q60,135 80,135 L400,135 Q420,135 420,155 L420,180 Q420,190 410,190 L70,190 Q60,190 60,180 Z" fill="url(#carBody)" stroke="#64748b" stroke-width="1" /> <!-- body upper / cabin --> <path d="M130,135 L165,80 Q170,72 180,72 L310,72 Q320,72 325,80 L370,135 Z" fill="url(#carBody)" stroke="#64748b" stroke-width="1" /> <!-- windows --> <path d="M170,130 L198,82 L240,82 L240,130 Z" fill="url(#windowG)" opacity="0.8" /> <path d="M248,130 L248,82 L305,82 L345,130 Z" fill="url(#windowG)" opacity="0.8" /> <!-- window divider --> <rect x="240" y="80" width="8" height="52" rx="2" fill="#94a3b8" /> <!-- front lights --> <rect x="405" y="145" width="18" height="12" rx="4" fill="#fbbf24" /> <rect x="56" y="145" width="18" height="12" rx="4" fill="#fbbf24" /> <!-- rear lights --> <rect x="56" y="160" width="14" height="8" rx="3" fill="#ef4444" /> <!-- grill --> <rect x="408" y="155" width="14" height="20" rx="3" fill="#334155" /> <line x1="412" y1="158" x2="412" y2="172" stroke="#475569" stroke-width="1" /> <line x1="416" y1="158" x2="416" y2="172" stroke="#475569" stroke-width="1" /> <!-- door lines --> <line x1="240" y1="135" x2="240" y2="185" stroke="#64748b" stroke-width="0.8" /> <line x1="310" y1="135" x2="310" y2="185" stroke="#64748b" stroke-width="0.8" /> <!-- door handles --> <rect x="260" y="155" width="14" height="3" rx="1.5" fill="#475569" /> <rect x="200" y="155" width="14" height="3" rx="1.5" fill="#475569" /> <!-- wheels --> <circle cx="135" cy="192" r="24" fill="#1e293b" stroke="#334155" stroke-width="2" /> <circle cx="135" cy="192" r="15" fill="#334155" /> <circle cx="135" cy="192" r="5" fill="#64748b" /> <circle cx="355" cy="192" r="24" fill="#1e293b" stroke="#334155" stroke-width="2" /> <circle cx="355" cy="192" r="15" fill="#334155" /> <circle cx="355" cy="192" r="5" fill="#64748b" /> <!-- wheel spokes --> <g stroke="#4a5568" stroke-width="1.5">
+        <line x1="135" y1="177" x2="135" y2="207" />
+        <line x1="120" y1="192" x2="150" y2="192" />
+        <line x1="124" y1="181" x2="146" y2="203" />
+        <line x1="146" y1="181" x2="124" y2="203" />
+       </g> <g stroke="#4a5568" stroke-width="1.5">
+        <line x1="355" y1="177" x2="355" y2="207" />
+        <line x1="340" y1="192" x2="370" y2="192" />
+        <line x1="344" y1="181" x2="366" y2="203" />
+        <line x1="366" y1="181" x2="344" y2="203" />
+      </svg>
+     </div>
+    </div>
+   </section><!-- FEATURES -->
+   <section class="w-full py-12 sm:py-16" style="background:#111d35">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+     <div class="glass rounded-xl p-4 sm:p-6 text-center card-hover">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.15)">
+       <img src="car.png" style="color:#f59e0b;width:24px;height:24px"></i>
+      </div>
+      <div class="font-heading font-700 text-sm sm:text-base" style="color:#ffffff">
+       Self-Drive
+      </div>
+      <div class="text-xs mt-1" style="color:#7ba8d9">
+       Freedom to explore
+      </div>
+     </div>
+     <div class="glass rounded-xl p-4 sm:p-6 text-center card-hover">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.15)">
+       <img src="user.png" style="color:#f59e0b;width:24px;height:24px"></i>
+      </div>
+      <div class="font-heading font-700 text-sm sm:text-base" style="color:#f8fafc">
+       With Driver
+      </div>
+      <div class="text-xs mt-1" style="color:#7ba8d9">
+       Sit back &amp; relax
+      </div>
+     </div>
+     <div class="glass rounded-xl p-4 sm:p-6 text-center card-hover">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.15)">
+       <img src="map-pin.png" style="color:#f59e0b;width:24px;height:24px"></i>
+      </div>
+      <div class="font-heading font-700 text-sm sm:text-base" style="color:#f8fafc">
+       Pick-up
+      </div>
+      <div class="text-xs mt-1" style="color:#7ba8d9">
+       Get it yourself
+      </div>
+     </div>
+     <div class="glass rounded-xl p-4 sm:p-6 text-center card-hover">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center" style="background:rgba(245,158,11,0.15)">
+       <img src="truck.png" style="color:#f59e0b;width:24px;height:24px"></i>
+      </div>
+      <div class="font-heading font-700 text-sm sm:text-base" style="color:#f8fafc">
+       Delivery
+      </div>
+      <div class="text-xs mt-1" style="color:#7ba8d9">
+       +₱300 fee
+      </div>
+     </div>
+    </div>
+   </section><!-- RATES -->
+   <section id="rates" class="w-full py-12 sm:py-20" style="background:#0a1628">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-10">
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(245,158,11,0.15);color:#f59e0b">
+       💰 Transparent Pricing
+      </div>
+      <h2 class="font-heading font-800 text-3xl sm:text-4xl mb-2" style="color:#f8fafc">Rental Rates</h2>
+      <p class="text-sm" style="color:#7ba8d9">Nissan Livina • All rates include fuel responsibility by renter</p>
+     </div><!-- Duration toggle -->
+     <div class="flex justify-center mb-8">
+      <div class="glass rounded-xl p-1 flex"><button id="btn24" onclick="showRates('24')" class="px-5 py-2 rounded-lg font-heading font-600 text-sm transition" style="background:#f59e0b;color:#0a1628">24 Hours</button> <button id="btn12" onclick="showRates('12')" class="px-5 py-2 rounded-lg font-heading font-600 text-sm transition" style="color:#7ba8d9">12 Hours</button>
+      </div>
+     </div>
+     <div class="rounded-2xl overflow-hidden" style="background:#111d35;border:1px solid rgba(255,255,255,0.06)">
+      <div class="grid grid-cols-12 px-4 sm:px-6 py-3 text-xs font-heading font-700 uppercase tracking-wider" style="color:#7ba8d9;border-bottom:1px solid rgba(255,255,255,0.06)">
+       <div class="col-span-6 sm:col-span-5">
+        Area
+       </div>
+       <div class="col-span-3 sm:col-span-4 text-right">
+        Rate
+       </div>
+       <div class="col-span-3 text-right">
+        Duration
+       </div>
+      </div>
+      <div id="ratesContainer"></div>
+     </div>
+     <div class="mt-6 flex flex-wrap gap-4 justify-center">
+      <div class="glass rounded-xl px-4 py-3 flex items-center gap-2 text-sm">
+       <img src="soap-dispenser-droplet.png" style="width:16px;height:16px;color:#f59e0b"></i><span style="color:#7ba8d9">Car Wash Fee:</span><span class="font-heading font-700" style="color:#f8fafc">₱200</span>
+      </div>
+      <div class="glass rounded-xl px-4 py-3 flex items-center gap-2 text-sm">
+       <img src="truck.png" style="width:16px;height:16px;color:#f59e0b"></i><span style="color:#7ba8d9">Delivery Fee:</span><span class="font-heading font-700" style="color:#f8fafc">₱300</span>
+      </div>
+     </div>
+    </div>
+   </section><!-- BOOKING -->
+   <section id="booking" class="w-full py-12 sm:py-20" style="background:#111d35">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-10">
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(245,158,11,0.15);color:#f59e0b">
+       📋 Reserve Now
+      </div>
+      <h2 class="font-heading font-800 text-3xl sm:text-4xl mb-2" style="color:#f8fafc">Book Your Ride</h2>
+     </div>
+     <form id="bookingForm" class="rounded-2xl p-6 sm:p-8 space-y-5" style="background:#0a1628;border:1px solid rgba(255,255,255,0.06)">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+       <div>
+        <label for="bName" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Full Name</label><input id="bName" type="text" required class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)" placeholder="Juan Dela Cruz">
+       </div>
+       <div>
+        <label for="bPhone" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Phone Number</label><input id="bPhone" type="tel" required class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)" placeholder="09XXXXXXXXX">
+       </div>
+      </div>
+      <div>
+       <label for="bEmail" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Email Address</label><input id="bEmail" type="email" class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)" placeholder="email@example.com">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+       <div>
+        <label for="bArea" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Destination Area</label><select id="bArea" required class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)"><option value="">Select area...</option></select>
+       </div>
+       <div>
+        <label for="bDuration" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Duration</label><select id="bDuration" required class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)"><option value="24hrs">24 Hours</option><option value="12hrs">12 Hours</option></select>
+       </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+       <div>
+        <label class="block text-xs font-semibold mb-2" style="color:#7ba8d9">Pick-up or Delivery?</label>
+        <div class="flex gap-3">
+         <label class="flex items-center gap-2 cursor-pointer text-sm" style="color:#f8fafc"><input type="radio" name="pickDel" value="pickup" checked class="accent-amber-400"> Pick-up</label><label class="flex items-center gap-2 cursor-pointer text-sm" style="color:#f8fafc"><input type="radio" name="pickDel" value="delivery" class="accent-amber-400"> Delivery (+₱300)</label>
+        </div>
+       </div>
+       <div>
+        <label class="block text-xs font-semibold mb-2" style="color:#7ba8d9">Drive Option</label>
+        <div class="flex gap-3">
+         <label class="flex items-center gap-2 cursor-pointer text-sm" style="color:#f8fafc"><input type="radio" name="driveOpt" value="self-drive" checked class="accent-amber-400"> Self-Drive</label><label class="flex items-center gap-2 cursor-pointer text-sm" style="color:#f8fafc"><input type="radio" name="driveOpt" value="with-driver" class="accent-amber-400"> With Driver</label>
+        </div>
+       </div>
+      </div>
+      <div>
+       <label for="bMsg" class="block text-xs font-semibold mb-1" style="color:#7ba8d9">Special Requests (optional)</label><textarea id="bMsg" rows="3" class="w-full rounded-lg px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-400 transition resize-none" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)" placeholder="Any notes..."></textarea>
+      </div>
+      <div class="flex items-start gap-2">
+       <input type="checkbox" id="agreeTerms" required class="accent-amber-400 mt-1"><label for="agreeTerms" class="text-xs" style="color:#7ba8d9">I agree to the <a href="#terms" class="underline" style="color:#f59e0b">Terms and Conditions</a></label>
+      </div>
+      <div id="bookingPrice" class="text-center py-3 rounded-lg font-heading font-700" style="background:rgba(245,158,11,0.1);color:#f59e0b"></div><button id="bookBtn" type="submit" class="w-full py-3 rounded-xl font-heading font-700 text-base transition hover:scale-[1.02]" style="background:#f59e0b;color:#0a1628">Submit Booking Request</button>
+      <div id="bookingMsg" class="hidden text-center py-3 rounded-lg text-sm font-semibold"></div>
+     </form>
+    </div>
+   </section><!-- TERMS -->
+   <section id="terms" class="w-full py-12 sm:py-20" style="background:#0a1628">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+     <div class="text-center mb-10">
+      <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(245,158,11,0.15);color:#f59e0b">
+       📜 Legal
+      </div>
+      <h2 class="font-heading font-800 text-3xl sm:text-4xl mb-2" style="color:#f8fafc">Terms &amp; Conditions</h2>
+      <p class="text-sm" style="color:#7ba8d9">Car Rental Agreement under Philippine Law</p>
+     </div>
+     <div class="rounded-2xl p-6 sm:p-8 space-y-5 text-sm leading-relaxed" style="background:#111d35;border:1px solid rgba(255,255,255,0.06);color:#a8cce8">
+      <h3 class="font-heading font-700 text-lg" style="color:#f59e0b">JAX CAR RENTAL — RENTAL AGREEMENT</h3>
+      <p>This Car Rental Agreement ("Agreement") is entered into between <strong style="color:#f8fafc">JAX Car Rental</strong> ("Lessor") and the renter ("Lessee") identified in the booking form. This agreement is governed by the laws of the <strong style="color:#f8fafc">Republic of the Philippines</strong>, including the Civil Code of the Philippines (Republic Act No. 386), the Land Transportation and Traffic Code (Republic Act No. 4136), and other applicable regulations.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">1. RENTAL PERIOD &amp; RATES</h4>
+      <p>The rental period shall begin upon release of the vehicle and end upon its return. Rates are based on the destination area and duration (12-hour or 24-hour). Overtime charges of <strong style="color:#f8fafc">₱150 per hour</strong> shall apply beyond the agreed rental period. The car wash fee of ₱200 is mandatory upon return.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">2. ELIGIBILITY REQUIREMENTS</h4>
+      <p>The Lessee must: (a) be at least 21 years of age; (b) possess a valid Philippine driver's license or, for foreigners, an International Driving Permit (IDP) alongside their foreign license, per LTO regulations; (c) present at least two (2) valid government-issued IDs; (d) provide a refundable security deposit as determined by the Lessor.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">3. USE OF VEHICLE</h4>
+      <p>The vehicle (Nissan Livina) shall be used exclusively for lawful purposes. The Lessee shall NOT: (a) use the vehicle for hire, racing, or any illegal activity; (b) drive under the influence of alcohol or prohibited substances (R.A. 10586 — Anti-Drunk and Drugged Driving Act); (c) allow unauthorized drivers to operate the vehicle; (d) take the vehicle outside the agreed destination without prior written consent; (e) use the vehicle for towing or pushing another vehicle.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">4. FUEL POLICY</h4>
+      <p>The vehicle shall be returned with the same fuel level as when received. If not, the Lessee shall pay the prevailing fuel cost plus a ₱200 refueling service charge.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">5. INSURANCE &amp; LIABILITY</h4>
+      <p>Basic Comprehensive Third-Party Liability (CTPL) insurance as mandated by R.A. 10607 (Amended Insurance Code) is included. The Lessee shall be personally liable for: (a) damages resulting from negligence, recklessness, or violation of traffic laws; (b) loss of personal belongings left inside the vehicle; (c) towing costs and fines from traffic violations incurred during the rental period; (d) the insurance deductible amount in case of an accident claim.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">6. ACCIDENT &amp; INCIDENT REPORTING</h4>
+      <p>In the event of any accident, breakdown, or theft, the Lessee must: (a) immediately notify JAX Car Rental at <strong style="color:#f59e0b">09928176144</strong>; (b) file a police report at the nearest station within 24 hours; (c) NOT attempt unauthorized repairs; (d) cooperate fully with the Lessor's insurance claim process.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">7. DAMAGE &amp; PENALTIES</h4>
+      <p>The Lessee shall be responsible for any damage to the vehicle not covered by insurance, including but not limited to: interior damage, missing accessories, tire damage, undercarriage damage. The cost of repairs shall be based on authorized dealer rates. Loss of rental income during repair period may also be charged.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">8. CANCELLATION POLICY</h4>
+      <p>Cancellations made 48 hours or more before the scheduled rental period shall receive a full refund of any advance payment. Cancellations within 24–48 hours shall incur a 50% cancellation fee. Cancellations less than 24 hours before shall forfeit the advance payment.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">9. DELIVERY &amp; PICK-UP</h4>
+      <p>Delivery is available for ₱300. The vehicle must be returned to the agreed pick-up location. Failure to return the vehicle within 6 hours of the agreed return time without prior arrangement may be considered qualified theft under Article 310 of the Revised Penal Code.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">10. DATA PRIVACY</h4>
+      <p>In compliance with <strong style="color:#f8fafc">R.A. 10173 — Data Privacy Act of 2012</strong>, the Lessor shall collect, use, and store personal data solely for the purpose of processing the rental transaction and will not disclose information to third parties without consent, except as required by law.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">11. DISPUTE RESOLUTION</h4>
+      <p>Any disputes arising from this Agreement shall be resolved through amicable settlement. If unresolved, the parties agree to submit to the jurisdiction of the proper courts in the Province of Bulacan, Philippines.</p>
+      <h4 class="font-heading font-600" style="color:#f8fafc">12. ACKNOWLEDGMENT</h4>
+      <p>By submitting the booking form and checking the "I agree" box, the Lessee acknowledges having read, understood, and agreed to all terms and conditions set forth herein. This electronic agreement shall have the same legal effect as a signed physical document, in accordance with <strong style="color:#f8fafc">R.A. 8792 — E-Commerce Act of 2000</strong>.</p>
+     </div>
+    </div>
+   </section><!-- CONTACT -->
+   <section id="contact" class="w-full py-12 sm:py-20" style="background:#111d35">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+     <div class="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3" style="background:rgba(245,158,11,0.15);color:#f59e0b">
+      📞 Get in Touch
+     </div>
+     <h2 class="font-heading font-800 text-3xl sm:text-4xl mb-6" style="color:#f8fafc">Contact Us</h2>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center"><a href="tel:09928176144" class="glass rounded-xl px-6 py-4 flex items-center gap-3 card-hover"><img src="phone.png" style="color:#f59e0b;width:20px;height:20px"></i><span class="font-heading font-700" id="contactNum" style="color:#f8fafc">09928176144</span></a> <a href="sms:09928176144" class="glass rounded-xl px-6 py-4 flex items-center gap-3 card-hover"><img src="message-circle.png" style="color:#f59e0b;width:20px;height:20px"></i><span class="font-heading font-600" style="color:#f8fafc">Send SMS</span></a>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="w-full py-8" style="background:#0a1628;border-top:1px solid rgba(255,255,255,0.05)">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+     <div class="flex items-center justify-center gap-2 mb-3">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center font-heading font-900 text-sm" style="background:#f59e0b;color:#0a1628">
+       JAX
+      </div><span class="font-heading font-700 text-sm" style="color:#f8fafc">CAR RENTAL</span>
+     </div>
+     <p class="text-xs" style="color:#4a7ab5">© 2026 JAX Car Rental. All rights reserved.</p>
+    </div>
+   </footer>
+  </div><!-- CHATBOX -->
+  <div id="chatToggle" onclick="toggleChat()" class="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition hover:scale-110" style="background:#f59e0b"><img src="white.png" style="color:#0a1628;width:26px;height:26px"></i>
+  </div>
+  <div id="chatBox" class="fixed bottom-20 right-5 z-50 hidden rounded-2xl overflow-hidden shadow-2xl" style="width:340px;max-width:calc(100% - 40px);background:#111d35;border:1px solid rgba(255,255,255,0.1)">
+   <div class="flex items-center justify-between px-4 py-3" style="background:#1a2a4a">
+    <div class="flex items-center gap-2">
+     <div class="w-8 h-8 rounded-full flex items-center justify-center font-heading font-800 text-xs" style="background:#f59e0b;color:#0a1628">
+      JAX
+     </div>
+     <div>
+      <div class="font-heading font-600 text-sm" style="color:#f8fafc">
+       JAX Support
+      </div>
+      <div class="text-xs" style="color:#4ade80">
+       ● Online
+      </div>
+     </div>
+    </div><button onclick="toggleChat()" class="p-1"><i data-lucide="x" style="color:#7ba8d9;width:18px;height:18px"></i></button>
+   </div>
+   <div id="chatMessages" class="p-4 space-y-3 overflow-y-auto" style="height:300px"></div>
+   <div class="flex gap-2 p-3" style="border-top:1px solid rgba(255,255,255,0.06)"><input id="chatInput" type="text" placeholder="Type your message..." class="flex-1 rounded-lg px-3 py-2 text-sm outline-none" style="background:#1a2a4a;color:#f8fafc;border:1px solid rgba(255,255,255,0.08)" onkeydown="if(event.key==='Enter')sendChat()"> <button onclick="sendChat()" class="px-3 py-2 rounded-lg transition hover:opacity-80" style="background:#f59e0b"><img src="message-circle-more.png" style="color:#0a1628;width:16px;height:16px"></i></button>
+   </div>
+  </div>
+  <script>
+const RATES={
+'Bulacan':{24:2499,12:1900},'Manila':{24:2499,12:1900},'Cavite':{24:2999,12:2300},'Laguna':{24:2999,12:2300},
+'Batangas':{24:3499,12:2800},'Tarlac':{24:2499,12:1800},'Pangasinan':{24:3499,12:2900},'Bolinao':{24:3499,12:2900},
+'Baguio':{24:3499,12:2900},'Nueva Ecija':{24:2499,12:1900},'Nueva Vizcaya':{24:3499,12:2900},'Aurora':{24:3499,12:2900},
+'Zambales':{24:3499,12:2900},'La Union':{24:3499,12:2900},'Subic':{24:2499,12:1900},'Bataan':{24:2499,12:1900},'Olongapo':{24:2499,12:1900}
+};
+let currentDuration='24';
+const areas=Object.keys(RATES);
+
+// Populate area select
+const areaSelect=document.getElementById('bArea');
+areas.forEach(a=>{const o=document.createElement('option');o.value=a;o.textContent=a;areaSelect.appendChild(o)});
+
+function showRates(d){
+currentDuration=d;
+document.getElementById('btn24').style.background=d==='24'?'#f59e0b':'transparent';
+document.getElementById('btn24').style.color=d==='24'?'#0a1628':'#7ba8d9';
+document.getElementById('btn12').style.background=d==='12'?'#f59e0b':'transparent';
+document.getElementById('btn12').style.color=d==='12'?'#0a1628':'#7ba8d9';
+const c=document.getElementById('ratesContainer');
+c.innerHTML='';
+areas.forEach(a=>{
+const r=RATES[a][parseInt(d)];
+c.innerHTML+=`<div class="rate-row grid grid-cols-12 px-4 sm:px-6 py-3 items-center transition" style="border-bottom:1px solid rgba(255,255,255,0.03)">
+<div class="col-span-6 sm:col-span-5 font-heading font-600 text-sm" style="color:#f8fafc">${a}</div>
+<div class="col-span-3 sm:col-span-4 text-right font-heading font-700 text-sm" style="color:#f59e0b">₱${r.toLocaleString()}</div>
+<div class="col-span-3 text-right text-xs" style="color:#7ba8d9">${d} hrs</div></div>`;
+});
+updatePrice();
+}
+showRates('24');
+
+function updatePrice(){
+const a=document.getElementById('bArea').value;
+const d=document.getElementById('bDuration').value==='24hrs'?24:12;
+const del=document.querySelector('input[name="pickDel"]:checked')?.value;
+const el=document.getElementById('bookingPrice');
+if(!a){el.textContent='Select an area to see the price';return;}
+let p=RATES[a][d];
+if(del==='delivery')p+=300;
+el.textContent=`Estimated Total: ₱${p.toLocaleString()}`;
+}
+document.getElementById('bArea').addEventListener('change',updatePrice);
+document.getElementById('bDuration').addEventListener('change',updatePrice);
+document.querySelectorAll('input[name="pickDel"]').forEach(r=>r.addEventListener('change',updatePrice));
+updatePrice();
+
+// Navbar scroll
+const nb=document.getElementById('navbar');
+document.getElementById('app').addEventListener('scroll',function(){
+nb.style.background=this.scrollTop>50?'rgba(10,22,40,0.95)':'transparent';
+nb.style.backdropFilter=this.scrollTop>50?'blur(12px)':'none';
+});
+
+// Data SDK
+let bookingCount=0;
+const dataHandler={onDataChanged(data){bookingCount=data.length}};
+(async()=>{
+const r=await window.dataSdk.init(dataHandler);
+if(!r.isOk)console.error('Data SDK init failed');
+})();
+
+document.getElementById('bookingForm').addEventListener('submit',async function(e){
+e.preventDefault();
+if(bookingCount>=999){showBookingMsg('Maximum bookings reached. Please contact us directly.','#ef4444');return;}
+const btn=document.getElementById('bookBtn');
+btn.disabled=true;btn.textContent='Submitting...';btn.style.opacity='0.6';
+const pd=document.querySelector('input[name="pickDel"]:checked')?.value||'pickup';
+const dr=document.querySelector('input[name="driveOpt"]:checked')?.value||'self-drive';
+const result=await window.dataSdk.create({
+type:'booking',name:document.getElementById('bName').value,email:document.getElementById('bEmail').value||'',
+phone:document.getElementById('bPhone').value,area:document.getElementById('bArea').value,
+duration:document.getElementById('bDuration').value,pickup_or_delivery:pd,drive_option:dr,
+message:document.getElementById('bMsg').value||'',submitted_at:new Date().toISOString()
+});
+btn.disabled=false;btn.textContent='Submit Booking Request';btn.style.opacity='1';
+if(result.isOk){showBookingMsg('✅ Booking request submitted! We will contact you shortly.','#4ade80');this.reset();updatePrice();}
+else{showBookingMsg('Something went wrong. Please try again or call us.','#ef4444');}
+});
+
+function showBookingMsg(t,c){const el=document.getElementById('bookingMsg');el.textContent=t;el.style.color=c;el.classList.remove('hidden');setTimeout(()=>el.classList.add('hidden'),5000);}
+
+// Chat
+function toggleChat(){document.getElementById('chatBox').classList.toggle('hidden');if(!document.getElementById('chatBox').classList.contains('hidden')&&document.getElementById('chatMessages').children.length===0){addBotMsg("Hi! 👋 Welcome to JAX Car Rental. How can I help you today?\n\nYou can ask about:\n• Rates & availability\n• Booking process\n• Self-drive vs. with driver\n• Areas we serve");}}
+function addBotMsg(t){const d=document.getElementById('chatMessages');const m=document.createElement('div');m.className='chat-msg flex gap-2';m.innerHTML=`<div class="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center font-heading font-800 text-xs" style="background:#f59e0b;color:#0a1628">J</div><div class="rounded-xl rounded-tl-sm px-3 py-2 text-sm max-w-[85%]" style="background:#1a2a4a;color:#f8fafc;white-space:pre-line">${t}</div>`;d.appendChild(m);d.scrollTop=d.scrollHeight;}
+function addUserMsg(t){const d=document.getElementById('chatMessages');const m=document.createElement('div');m.className='chat-msg flex justify-end';m.innerHTML=`<div class="rounded-xl rounded-tr-sm px-3 py-2 text-sm max-w-[85%]" style="background:#f59e0b;color:#0a1628">${t}</div>`;d.appendChild(m);d.scrollTop=d.scrollHeight;}
+
+function sendChat(){
+const inp=document.getElementById('chatInput');const t=inp.value.trim();if(!t)return;
+addUserMsg(t);inp.value='';
+setTimeout(()=>{
+const tl=t.toLowerCase();
+if(tl.includes('rate')||tl.includes('price')||tl.includes('cost')||tl.includes('magkano')||tl.includes('how much'))addBotMsg("Our rates start at ₱1,800 for 12 hrs and ₱2,499 for 24 hrs depending on the area. Check the Rates section above for full pricing! 💰\n\nCar wash: ₱200\nDelivery: ₱300");
+else if(tl.includes('book')||tl.includes('reserve')||tl.includes('rent'))addBotMsg("You can book by filling out the form in the 'Book Your Ride' section above! 📋\n\nOr call/text us at 09928176144 for immediate assistance.");
+else if(tl.includes('driver')||tl.includes('self'))addBotMsg("We offer both options!\n\n🚗 Self-Drive: You drive yourself\n👤 With Driver: Professional driver included\n\nJust select your preference in the booking form.");
+else if(tl.includes('area')||tl.includes('location')||tl.includes('where')||tl.includes('saan'))addBotMsg("We serve 17 areas across Luzon including:\n\nMetro Manila, Bulacan, Cavite, Laguna, Batangas, Tarlac, Pangasinan, Baguio, Nueva Ecija, and more! 📍");
+else if(tl.includes('contact')||tl.includes('number')||tl.includes('call'))addBotMsg("📞 Call or text us anytime:\n09928176144\n\nWe'll be happy to help!");
+else if(tl.includes('car')||tl.includes('vehicle')||tl.includes('livina')||tl.includes('nissan'))addBotMsg("We currently offer the Nissan Livina — a spacious, fuel-efficient, and reliable MPV perfect for family trips and long drives! 🚗");
+else if(tl.includes('deliver'))addBotMsg("Yes! We offer vehicle delivery for just ₱300. Or you can pick it up for free. 🚚");
+else if(tl.includes('thank')||tl.includes('salamat'))addBotMsg("You're welcome! 😊 Don't hesitate to reach out if you need anything else. Safe travels! 🚗");
+else addBotMsg("Thanks for your message! For detailed inquiries, please call or text us at 09928176144. You can also fill out the booking form above. 😊\n\nI can help with: rates, booking, areas, vehicle info, or delivery options.");
+},800);
+}
+
+// Element SDK
+const defaultConfig={
+hero_title:'Your Ride, Your Way',hero_subtitle:'Affordable self-drive & chauffeured car rental across Luzon. Nissan Livina — spacious, fuel-efficient, reliable.',
+contact_number:'09928176144',
+background_color:'#0a1628',surface_color:'#111d35',text_color:'#f8fafc',primary_action:'#f59e0b',secondary_action:'#7ba8d9',
+font_family:'Outfit',font_size:16
+};
+
+function applyConfig(cfg){
+document.getElementById('heroTitle').innerHTML=(cfg.hero_title||defaultConfig.hero_title).replace(/(Your Way|Your Ride)/g,'<span style="color:'+(cfg.primary_action||defaultConfig.primary_action)+'">$1</span>');
+document.getElementById('heroSubtitle').textContent=cfg.hero_subtitle||defaultConfig.hero_subtitle;
+document.getElementById('contactNum').textContent=cfg.contact_number||defaultConfig.contact_number;
+const ff=cfg.font_family||defaultConfig.font_family;
+const bs=cfg.font_size||defaultConfig.font_size;
+document.querySelectorAll('.font-heading').forEach(el=>el.style.fontFamily=`${ff}, Outfit, sans-serif`);
+document.querySelectorAll('h1').forEach(e=>e.style.fontSize=bs*2.8+'px');
+document.querySelectorAll('h2').forEach(e=>e.style.fontSize=bs*2+'px');
+}
+
+window.elementSdk.init({
+defaultConfig,
+onConfigChange:async(cfg)=>applyConfig(cfg),
+mapToCapabilities:(cfg)=>({
+recolorables:[
+{get:()=>cfg.background_color||defaultConfig.background_color,set:v=>{cfg.background_color=v;window.elementSdk.setConfig({background_color:v})}},
+{get:()=>cfg.surface_color||defaultConfig.surface_color,set:v=>{cfg.surface_color=v;window.elementSdk.setConfig({surface_color:v})}},
+{get:()=>cfg.text_color||defaultConfig.text_color,set:v=>{cfg.text_color=v;window.elementSdk.setConfig({text_color:v})}},
+{get:()=>cfg.primary_action||defaultConfig.primary_action,set:v=>{cfg.primary_action=v;window.elementSdk.setConfig({primary_action:v})}},
+{get:()=>cfg.secondary_action||defaultConfig.secondary_action,set:v=>{cfg.secondary_action=v;window.elementSdk.setConfig({secondary_action:v})}}
+],
+borderables:[],
+fontEditable:{get:()=>cfg.font_family||defaultConfig.font_family,set:v=>{cfg.font_family=v;window.elementSdk.setConfig({font_family:v})}},
+fontSizeable:{get:()=>cfg.font_size||defaultConfig.font_size,set:v=>{cfg.font_size=v;window.elementSdk.setConfig({font_size:v})}}
+}),
+mapToEditPanelValues:(cfg)=>new Map([
+['hero_title',cfg.hero_title||defaultConfig.hero_title],
+['hero_subtitle',cfg.hero_subtitle||defaultConfig.hero_subtitle],
+['contact_number',cfg.contact_number||defaultConfig.contact_number]
+])
+});
+
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fbed5cfc221fe13',t:'MTc3ODgxMzQyNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
